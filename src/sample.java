@@ -1,35 +1,28 @@
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
-
 public class sample {
 
-    public static int[] twoNumberSum(int[] array, int target) {
-        Set<Integer> nums = new HashSet<>();
-        for (int i = 0; i < array.length; i++) {
-            int num = array[i];
-            int match = target - num;
-            if (nums.contains(match)) {
-                return new int[]{num, match};
-            } else {
-                nums.add(num);
+    public static int[] moveElementToEnd(int[] array, int target) {
+        int i = 0, j = array.length - 1;
+        while (i < j) {
+            while (i < j && array[j] == target) {
+                j--;
             }
+            if (array[i] == target) {
+                int temp = array[j];
+                array[j] = array[i];
+                array[i] = temp;
+            }
+            i++;
         }
-        return new int[0];
+        return array;
     }
 
     public static void main(String[] args) {
-        int[] array = {6, 5, 7, 9, 4, 0, 2};
-        int target = 10;
-        int[] result = twoNumberSum(array, target);
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i]);
+        int[] array = {2, 1, 2, 2, 2, 3, 4, 2};
+        int target = 2;
+        int[] result = moveElementToEnd(array, target);
+        for (int j : result) {
+            System.out.println(j);
         }
-        List<Object> a = new LinkedList<>();
-        a.add(1);
-        a.add("sr");
-        a.forEach(System.out::println);
     }
 
 }

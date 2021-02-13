@@ -11,8 +11,7 @@ public class Stack {
 
     public Node top = null;
 
-    public void push(int data) // insert at the beginning
-    {
+    public void push(int data) {
         Node node = new Node(data);
         node.next = top;
         top = node;
@@ -40,8 +39,8 @@ public class Stack {
         }
         System.out.println();
     }
-    public static void main(String[] args)
-    {
+
+    public static void main(String[] args) {
         Stack q = new Stack();
         q.push(10);
         q.push(20);

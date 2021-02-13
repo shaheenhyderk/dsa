@@ -39,38 +39,56 @@ public class s {
     }
 
     void deleteNode(int value) {
-        Node current = head, prev = null;
+        Node temp = head, prev = null;
 
-        if (current != null && current.data == value) {
-            head = current.next;
+        if (temp != null && temp.data == value) {
+            head = temp.next;
             return;
         }
 
-        while (current != null && current.data != value) {
-            prev = current;
-            current = current.next;
+        while (temp != null && temp.data != value) {
+            prev = temp;
+            temp = temp.next;
         }
 
-        if (current == null)
+        if (temp == null)
             return;
 
-        prev.next = current.next;
+        prev.next = temp.next;
     }
 
     void insertAfter(int nodeValue, int value) {
-        Node current = head;
+        Node temp = head;
         Node newNode = new Node(value);
 
-        while (current != null && current.data != nodeValue) {
-            current = current.next;
+        while (temp != null && temp.data != nodeValue) {
+            temp = temp.next;
         }
 
-        if (current == null)
+        if (temp == null)
             return;
 
-        newNode.next = current.next;
-        current.next = newNode;
+        newNode.next = temp.next;
+        temp.next = newNode;
 
+    }
+
+    public void removeDuplicates() {
+        Node currentNode = head;
+        while (currentNode != null) {
+            Node nextDistinctNode = currentNode.next;
+            while (nextDistinctNode != null && nextDistinctNode.data == currentNode.data) {
+                nextDistinctNode = nextDistinctNode.next;
+            }
+
+            currentNode.next = nextDistinctNode;
+
+            if (nextDistinctNode == null) {
+                tail = currentNode;
+            }
+
+            currentNode = nextDistinctNode;
+        }
     }
 
     public static void main(String[] args) {
@@ -80,13 +98,18 @@ public class s {
         sList.addNode(1);
         sList.addNode(2);
         sList.addNode(3);
+        sList.addNode(3);
+        sList.addNode(3);
+        sList.addNode(2);
+        sList.addNode(4);
         sList.addNode(4);
         sList.deleteNode(3);
+//        sList.removeDuplicates();
         sList.insertAfter(2, 5);
 
         sList.display();
+        System.out.println(sList.tail.data);
     }
-
 
 
 }
