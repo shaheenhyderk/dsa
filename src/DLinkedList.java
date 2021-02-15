@@ -6,8 +6,6 @@ public class DLinkedList {
 
         public Node(int data) {
             this.data = data;
-            this.next = null;
-            this.prev = null;
         }
     }
 
