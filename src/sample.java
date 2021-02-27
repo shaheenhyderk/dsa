@@ -1,28 +1,31 @@
-public class sample {
+import java.util.HashMap;
+import java.util.Map;
 
-    public static int[] moveElementToEnd(int[] array, int target) {
-        int i = 0, j = array.length - 1;
-        while (i < j) {
-            while (i < j && array[j] == target) {
-                j--;
-            }
-            if (array[i] == target) {
-                int temp = array[j];
-                array[j] = array[i];
-                array[i] = temp;
-            }
-            i++;
-        }
-        return array;
+public class sample {
+    public static void main(String[] args) {
+        String input = "AABBBCCCCDEEEAA";
+        countAndPrintCharacters(input);
     }
 
-    public static void main(String[] args) {
-        int[] array = {2, 1, 2, 2, 2, 3, 4, 2};
-        int target = 2;
-        int[] result = moveElementToEnd(array, target);
-        for (int j : result) {
-            System.out.println(j);
+    private static void countAndPrintCharacters(String input) {
+        char prev = 0;
+        int count = 1;
+        String pattern = "";
+        for (int i = 0; i < input.length(); i++) {
+            if (i == 0) {
+                prev = input.charAt(i);
+            } else {
+                if (input.charAt(i) == prev) {
+                    count++;
+                } else {
+                    pattern = pattern+prev+count;
+                    prev = input.charAt(i);
+                    count = 1;
+                }
+            }
         }
+        pattern = pattern+prev+count;
+        System.out.println(pattern);
     }
 
 }
