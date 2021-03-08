@@ -27,7 +27,7 @@ public class MinHeap {
         while (child1Idx <= endIdx) {
             int child2Idx = currentIdx * 2 + 2;
             int idxToSwap;
-            if (child2Idx > endIdx && heap.get(child2Idx) < heap.get(child1Idx)) {
+            if (child2Idx <= endIdx && heap.get(child2Idx) < heap.get(child1Idx)) {
                 idxToSwap = child2Idx;
             } else {
                 idxToSwap = child1Idx;
@@ -64,7 +64,6 @@ public class MinHeap {
     }
 
     public void insert(int value) {
-        System.out.println(heap.getClass());
         heap.add(value);
         shiftUp(heap.size() - 1);
     }
