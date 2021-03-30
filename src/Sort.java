@@ -1,8 +1,19 @@
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 
 public class Sort {
+    public static void insertionSort(int[] arr)
+    {
+        for (int i = 1; i < arr.length; ++i) {
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j] > key) {
+                arr[j + 1] = arr[j];
+                j = j - 1;
+            }
+            arr[j + 1] = key;
+        }
+    }
+
     public static int[] quickSort(int[] array) {
         quickSortHelper(array, 0, array.length - 1);
         return array;
@@ -72,6 +83,43 @@ public class Sort {
         int t = a[i];
         a[i] = a[j];
         a[j] = t;
+    }
+
+
+    public static int[] heapSort(int[] array) {
+        buildHeap(array);
+        for (int endIdx = array.length -1; endIdx > 0; endIdx--){
+            swap(array, 0, endIdx);
+            shiftDown(0, endIdx-1 ,array);
+        }
+        return array;
+    }
+
+    private static void buildHeap(int[] array) {
+        int firstParentIdx = (array.length - 2) / 2;
+        for (int currentIdx = firstParentIdx; currentIdx >= 0; currentIdx--) {
+            shiftDown(currentIdx, array.length-1, array);
+        }
+    }
+
+    private static void shiftDown(int currentIdx, int endIdx, int[] heap) {
+        int child1Idx = currentIdx * 2 + 1;
+        while (child1Idx <= endIdx) {
+            int child2Idx = currentIdx * 2 + 2;
+            int idxToSwap;
+            if (child2Idx <= endIdx && heap[child2Idx] > heap[child1Idx]) {
+                idxToSwap = child2Idx;
+            } else {
+                idxToSwap = child1Idx;
+            }
+            if (heap[idxToSwap] > heap[currentIdx]) {
+                swap(heap, currentIdx, idxToSwap);
+                currentIdx = idxToSwap;
+                child1Idx = currentIdx * 2 + 1;
+            } else {
+                return;
+            }
+        }
     }
 
     public static void main(String[] args) {
